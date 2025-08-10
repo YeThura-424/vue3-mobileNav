@@ -1,8 +1,8 @@
 <template>
   <!-- <div class="z-10"> -->
-  <div class="nav-wrapper bg-[#fff] w-full rounded-t-lg p-3 m-w-[56px]">
+  <div class="nav-wrapper bg-[#fff] w-full rounded-t-lg px-3 m-w-[56px]">
     <div class="nav-link-container flex justify-between items-center relative">
-      <div class="flex gap-x-10">
+      <div class="flex gap-x-10 py-3">
         <nuxt-link to="/">
           <span class="nav-link-item">
             <IconHome :class="[
@@ -43,11 +43,16 @@
     </div>
     <!-- center icon  -->
     <div
-      class="z-10 justify-center flex items-center nav-link-item center-item absolute left-1/2 -translate-x-1/2 bottom-[10px]">
-      <IconCircleXFilled v-if="openMenu" class="text-6xl text-[#7F3DFF]" @click="openMenuDialog" />
-      <IconCirclePlusFilled v-else class="text-6xl text-[#7F3DFF]" @click="openMenuDialog" />
+      class="z-10 justify-center flex items-center nav-link-item center-item absolute left-1/2 -translate-x-1/2 bottom-[20px]">
+      <IconCircleXFilled v-if="openMenu" class="text-6xl text-[#7F3DFF]" :size="48" @click="openMenuDialog" />
+      <IconCirclePlusFilled v-else class="text-6xl text-[#7F3DFF]" :size="36" @click="openMenuDialog" />
     </div>
-    <div class="rounded-b-full w-[70px] h-[65px] bg-[#eee] absolute left-1/2 -translate-x-1/2 bottom-[5px]"></div>
+    <div class="absolute left-1/2 -translate-x-1/2 top-0">
+      <Curve />
+    </div>
+    <div class="absolute left-1/2 -translate-x-1/2 bottom-5">
+      <Circle />
+    </div>
     <CoreMenuModelOld :visible="openMenu" @dismiss="closeMenu" />
   </div>
   <!-- </div> -->
@@ -56,6 +61,8 @@
 import { IconHome, IconArrowsDoubleSwNe, IconChartPie, IconUser, IconCircleXFilled, IconCirclePlusFilled } from '@tabler/icons-vue';
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
+import Curve from './MenuIcon/Curve.vue';
+import Circle from './MenuIcon/Circle.vue';
 
 const openMenu = ref(false);
 const router = useRoute();
