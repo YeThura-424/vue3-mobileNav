@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@headlessui/vue": "^1.7.23",
     "@tabler/icons-vue": "^3.34.1",
     "@tailwindcss/vite": "^4.1.11",
     "tailwindcss": "^4.1.11",
