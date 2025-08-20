@@ -3,15 +3,15 @@
   <div class="nav-wrapper bg-[#fff] w-full rounded-t-lg px-3 m-w-[56px]">
     <div class="nav-link-container flex justify-between items-center relative">
       <div class="flex gap-x-10 py-3">
-        <nuxt-link to="/">
+        <router-link to="/">
           <span class="nav-link-item">
             <IconHome :class="[
               'text-3xl',
               activeRoute('index') ? 'text-[#7F3DFF]' : 'text-[#C6C6C6]',
             ]" />
           </span>
-        </nuxt-link>
-        <nuxt-link to="/transaction">
+        </router-link>
+        <router-link to="/transaction">
           <span class="nav-link-item">
             <IconArrowsDoubleSwNe :class="[
               'text-3xl',
@@ -20,32 +20,32 @@
                 : 'text-[#C6C6C6]',
             ]" />
           </span>
-        </nuxt-link>
+        </router-link>
       </div>
       <div class="flex gap-x-10">
-        <nuxt-link to="/budget">
+        <router-link to="/budget">
           <span class="nav-link-item">
             <IconChartPie :class="[
               'text-3xl',
               activeRoute('budget') ? 'text-[#7F3DFF]' : 'text-[#C6C6C6]',
             ]" />
           </span>
-        </nuxt-link>
-        <nuxt-link to="/profile">
+        </router-link>
+        <router-link to="/profile">
           <span class="nav-link-item">
             <IconUser :class="[
               'text-3xl',
               activeRoute('profile') ? 'text-[#7F3DFF]' : 'text-[#C6C6C6]',
             ]" />
           </span>
-        </nuxt-link>
+        </router-link>
       </div>
     </div>
     <!-- center icon  -->
     <div
       class="z-10 justify-center flex items-center nav-link-item center-item absolute left-1/2 -translate-x-1/2 bottom-[20px]">
       <IconCircleXFilled v-if="openMenu" class="text-6xl text-[#7F3DFF]" :size="48" @click="openMenuDialog" />
-      <IconCirclePlusFilled v-else class="text-6xl text-[#7F3DFF]" :size="36" @click="openMenuDialog" />
+      <IconCirclePlusFilled v-else class="text-6xl text-[#7F3DFF]" :size="40" @click="openMenuDialog" />
     </div>
     <div class="absolute left-1/2 -translate-x-1/2 top-0">
       <Curve />
@@ -53,7 +53,7 @@
     <div class="absolute left-1/2 -translate-x-1/2 bottom-5">
       <Circle />
     </div>
-    <CoreMenuModelOld :visible="openMenu" @dismiss="closeMenu" />
+    <MenuModel :visible="openMenu" @dismiss="closeMenu" />
   </div>
   <!-- </div> -->
 </template>
@@ -63,6 +63,7 @@ import { ref } from 'vue';
 import { useRoute } from 'vue-router';
 import Curve from './MenuIcon/Curve.vue';
 import Circle from './MenuIcon/Circle.vue';
+import { MenuModel } from './additional';
 
 const openMenu = ref(false);
 const router = useRoute();
