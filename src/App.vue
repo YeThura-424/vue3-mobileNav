@@ -4,10 +4,10 @@ import NavBar from "./components/NavBar.vue";
 </script>
 
 <template>
-  <div class="main-container flex justify-center items-center bg-[#E5E7EB] h-screen w-screen">
-    <div class=" w-[500px] h-[500px] ">
+  <div class=" bg-[#E5E7EB] w-screen h-screen flex justify-center">
+    <div class="w-[360px] bg-[#E5E7EB]">
       <div class="content-section h-8 bg-[#fff] py-5 mb-3"></div>
-      <div class="navbar-container relative">
+      <div class="navbar-container w-[360px] fixed bottom-0">
         <NavBar />
       </div>
     </div>
