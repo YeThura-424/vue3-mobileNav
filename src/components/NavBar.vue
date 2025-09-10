@@ -80,28 +80,3 @@ const activeRoute = (route) => {
   return router?.name === route;
 };
 </script>
-<style scoped>
-/* .nav-link-item.center-item::before {
-  content: "";
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: #fff;
-  border-top-right-radius: 20px;
-  top: 10px;
-  right: 65px;
-  box-shadow: 6px -5px 0px 0px #eee;
-}
-
-.nav-link-item.center-item::after {
-  content: "";
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: #fff;
-  border-top-left-radius: 20px;
-  top: 10px;
-  left: 65px;
-  box-shadow: -6px -5px 0px 0px #eee;
-} */
-</style>
