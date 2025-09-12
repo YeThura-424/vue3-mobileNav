@@ -1,5 +1,5 @@
 <template>
-  <div class="relative w-[360px] h-[70px] bg-white rounded-lg flex items-center justify-center px-5">
+  <div class="relative w-[360px] h-[48px] bg-white flex items-center justify-center px-5">
     <ul class="flex justify-between w-full relative">
       <li v-for="(item, index) in navItems" :key="index"
         class="relative w-[70px] h-[70px] z-10 flex flex-col items-center justify-center cursor-pointer"
@@ -8,7 +8,7 @@
           <!-- Tabler Icon -->
           <component :is="item.icon" class="transition-all duration-500 w-[22px] h-[22px]" :class="[
             activeIndex === index
-              ? 'text-white -translate-y-8'
+              ? 'text-[#7F3DFF] -translate-y-8'
               : 'text-gray-900 translate-y-0',
           ]" />
 
@@ -24,15 +24,22 @@
       </li>
 
       <!-- Moving Indicator -->
-      <li
-        class="absolute top-[-50%] w-[70px] h-[70px] rounded-full border-[6px] border-[#222327] bg-red-500 transition-transform duration-300 z-0"
-        :style="{ transform: `translateX(${indicatorX}px)` }"></li>
+      <li class="absolute top-[10.5px] left-[-22px] transition-transform duration-300 z-0"
+        :style="{ transform: `translateX(${indicatorX}px)` }">
+        <Curve />
+      </li>
+      <li class="absolute top-[-14px] left-[7px] transition-transform duration-300 z-0"
+        :style="{ transform: `translateX(${indicatorX}px)` }">
+        <Circle />
+      </li>
     </ul>
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from "vue";
+import Curve from './MenuIcon/Curve.vue';
+import Circle from './MenuIcon/Circle.vue';
 import {
   IconHome,
   IconInfoCircle,

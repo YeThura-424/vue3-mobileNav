@@ -1,6 +1,6 @@
 <template>
   <!-- <div class="z-10"> -->
-  <div class="nav-wrapper bg-[#fff] w-full rounded-t-lg px-3 m-w-[56px]">
+  <div class="nav-wrapper bg-[#fff] w-full rounded-t-lg px-3">
     <div class="nav-link-container flex justify-between items-center relative">
       <div class="flex gap-x-10 py-3">
         <router-link to="/">
