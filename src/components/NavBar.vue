@@ -3,42 +3,42 @@
   <div class="nav-wrapper bg-[#fff] w-full rounded-t-lg px-3">
     <div class="nav-link-container flex justify-between items-center relative">
       <div class="flex gap-x-10 py-3">
-        <router-link to="/">
+        <a href="#" @click.prevent="setActiveRoute(routes[0].name)">
           <span class="nav-link-item">
             <IconHome :class="[
               'text-3xl',
-              activeRoute('index') ? 'text-[#7F3DFF]' : 'text-[#C6C6C6]',
+              activeRoute === routes[0].name ? 'text-[#7F3DFF]' : 'text-[#C6C6C6]',
             ]" />
           </span>
-        </router-link>
-        <router-link to="/transaction">
+        </a>
+        <a href="#" @click.prevent="setActiveRoute(routes[1].name)">
           <span class="nav-link-item">
             <IconArrowsDoubleSwNe :class="[
               'text-3xl',
-              activeRoute('transaction')
+              activeRoute === routes[1].name
                 ? 'text-[#7F3DFF]'
                 : 'text-[#C6C6C6]',
             ]" />
           </span>
-        </router-link>
+        </a>
       </div>
       <div class="flex gap-x-10">
-        <router-link to="/budget">
+        <a href="#" @click.prevent="setActiveRoute(routes[2].name)">
           <span class="nav-link-item">
             <IconChartPie :class="[
               'text-3xl',
-              activeRoute('budget') ? 'text-[#7F3DFF]' : 'text-[#C6C6C6]',
+              activeRoute === routes[2].name ? 'text-[#7F3DFF]' : 'text-[#C6C6C6]',
             ]" />
           </span>
-        </router-link>
-        <router-link to="/profile">
+        </a>
+        <a href="#" @click.prevent="setActiveRoute(routes[3].name)">
           <span class="nav-link-item">
             <IconUser :class="[
               'text-3xl',
-              activeRoute('profile') ? 'text-[#7F3DFF]' : 'text-[#C6C6C6]',
+              activeRoute === routes[3].name ? 'text-[#7F3DFF]' : 'text-[#C6C6C6]',
             ]" />
           </span>
-        </router-link>
+        </a>
       </div>
     </div>
     <!-- center icon  -->
@@ -59,14 +59,31 @@
 </template>
 <script setup>
 import { IconHome, IconArrowsDoubleSwNe, IconChartPie, IconUser, IconCircleXFilled, IconCirclePlusFilled } from '@tabler/icons-vue';
-import { ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { ref, defineProps, defineEmits } from 'vue';
 import Curve from './MenuIcon/Curve.vue';
 import Circle from './MenuIcon/Circle.vue';
 import { MenuModel } from './additional';
 
+const props = defineProps({
+  routes: {
+    type: Array,
+    default: () => [
+      { name: 'index', path: '/' },
+      { name: 'transaction', path: '/transaction' },
+      { name: 'budget', path: '/budget' },
+      { name: 'profile', path: '/profile' }
+    ]
+  },
+  initialActiveRoute: {
+    type: String,
+    default: 'index'
+  }
+});
+
+const emit = defineEmits(['route-change']);
+
 const openMenu = ref(false);
-const router = useRoute();
+const activeRoute = ref(props.initialActiveRoute);
 
 const openMenuDialog = () => {
   openMenu.value = true;
@@ -76,7 +93,8 @@ const closeMenu = (value) => {
   openMenu.value = value;
 };
 
-const activeRoute = (route) => {
-  return router?.name === route;
+const setActiveRoute = (routeName) => {
+  activeRoute.value = routeName;
+  emit('route-change', routeName);
 };
 </script>
