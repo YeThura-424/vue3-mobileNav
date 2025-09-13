@@ -1,5 +1,21 @@
-# Vue 3 + TypeScript + Vite
+# vue3-mobileNav
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+A simple, customizable Vue 3 component library for a mobile bottom navigation bar, built with Tailwind CSS and TypeScript.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+---
+
+## 🚀 Features
+
+- Minimal and responsive bottom navigation designed for mobile and progressive web apps  
+- Built as a Vue 3 component using the `<script setup>` syntax  
+- Fully typed with TypeScript  
+- Styles with Tailwind CSS — easy to customize via utility classes or props  
+- Lightweight and easy to integrate  
+- Works well with Vite and modern Vue toolchains
+
+---
+
+
+## 📄License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
