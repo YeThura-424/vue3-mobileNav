@@ -8,7 +8,10 @@ const customRoutes = [
   { name: 'index', path: '/' },
   { name: 'transaction', path: '/transaction' },
   { name: 'budget', path: '/budget' },
-  { name: 'profile', path: '/profile' }
+  { name: 'profile', path: '/profile' },
+  { name: 'transfer', path: '/transfer' },
+  { name: 'income', path: '/income' },
+  { name: 'expense', path: '/expense' }
 ];
 
 const handleRouteChange = (routeName: string) => {

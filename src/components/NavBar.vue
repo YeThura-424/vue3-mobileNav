@@ -53,7 +53,12 @@
     <div class="absolute left-1/2 -translate-x-1/2 bottom-5">
       <Circle />
     </div>
-    <MenuModel :visible="openMenu" @dismiss="closeMenu" />
+    <MenuModel 
+      :visible="openMenu" 
+      :active-route="activeRoute" 
+      @dismiss="closeMenu" 
+      @route-change="handleMenuRouteChange" 
+    />
   </div>
   <!-- </div> -->
 </template>
@@ -96,5 +101,9 @@ const closeMenu = (value) => {
 const setActiveRoute = (routeName) => {
   activeRoute.value = routeName;
   emit('route-change', routeName);
+};
+
+const handleMenuRouteChange = (routeName) => {
+  setActiveRoute(routeName);
 };
 </script>

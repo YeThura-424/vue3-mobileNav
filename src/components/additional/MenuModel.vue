@@ -15,27 +15,27 @@
               class="w-fit max-w-md transform overflow-hidden transition-all absolute left-1/2 -translate-x-1/2 bottom-[90px]">
               <div class="upper_menu_wrapper flex justify-center gap-x-24">
                 <div class="income_menu">
-                  <router-links to="/transfer" class="focus:outline-none">
+                  <a href="#" @click.prevent="navigateTo('transfer')" class="focus:outline-none">
                     <button class="bg-[#0077FF] flex items-center justify-center rounded-full w-14 h-14">
                       <IconTransform class="text-3xl text-[#fff]" />
                     </button>
-                  </router-links>
+                  </a>
                 </div>
               </div>
               <div class="lower_menu_wrapper flex justify-center gap-x-24">
                 <div class="income_menu">
-                  <router-links to="/income">
+                  <a href="#" @click.prevent="navigateTo('income')">
                     <button class="bg-[#00A86B] flex items-center justify-center rounded-full w-14 h-14">
                       <IconTransferIn class="text-3xl text-[#fff]" />
                     </button>
-                  </router-links>
+                  </a>
                 </div>
                 <div class="expense_menu">
-                  <router-links to="/expense">
+                  <a href="#" @click.prevent="navigateTo('expense')">
                     <button class="bg-[#FD3C4A] flex items-center justify-center rounded-full w-14 h-14">
                       <IconTransferOut class="text-3xl text-[#fff]" />
                     </button>
-                  </router-links>
+                  </a>
                 </div>
               </div>
             </DialogPanel>
@@ -67,8 +67,20 @@ const props = defineProps({
     type: String,
     default: "items-center",
   },
+  routes: {
+    type: Array,
+    default: () => [
+      { name: 'transfer', path: '/transfer' },
+      { name: 'income', path: '/income' },
+      { name: 'expense', path: '/expense' }
+    ]
+  },
+  activeRoute: {
+    type: String,
+    default: ''
+  }
 });
-const emit = defineEmits(["dismiss"]);
+const emit = defineEmits(["dismiss", "route-change"]);
 
 const isOpen = ref(false);
 
@@ -82,5 +94,10 @@ watch(
 function closeMenu() {
   isOpen.value = false;
   emit("dismiss", isOpen.value);
+}
+
+function navigateTo(routeName) {
+  emit("route-change", routeName);
+  closeMenu();
 }
 </script>
