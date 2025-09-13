@@ -11,7 +11,8 @@
           <TransitionChild as="template" enter="duration-300 ease-out" enter-from="opacity-0 scale-95"
             enter-to="opacity-100 scale-100" leave="duration-200 ease-in" leave-from="opacity-100 scale-100"
             leave-to="opacity-0 scale-95">
-            <DialogPanel class="w-fit max-w-md transform overflow-hidden transition-all absolute bottom-[90px]">
+            <DialogPanel
+              class="w-fit max-w-md transform overflow-hidden transition-all absolute left-1/2 -translate-x-1/2 bottom-[90px]">
               <div class="upper_menu_wrapper flex justify-center gap-x-24">
                 <div class="income_menu">
                   <router-links to="/transfer" class="focus:outline-none">
