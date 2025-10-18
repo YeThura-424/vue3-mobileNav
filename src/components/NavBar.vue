@@ -53,14 +53,10 @@
     <div class="absolute left-1/2 -translate-x-1/2 bottom-5">
       <Circle />
     </div>
-    <MenuModel 
-      :visible="openMenu" 
-      :active-route="activeRoute" 
-      @dismiss="closeMenu" 
-      @route-change="handleMenuRouteChange" 
-    />
+    <MenuModel :visible="openMenu" :active-route="activeRoute" @dismiss="closeMenu"
+      @route-change="handleMenuRouteChange" />
   </div>
-  <!-- </div> -->
+  <!-- </div> test -->
 </template>
 <script setup>
 import { IconHome, IconArrowsDoubleSwNe, IconChartPie, IconUser, IconCircleXFilled, IconCirclePlusFilled } from '@tabler/icons-vue';
