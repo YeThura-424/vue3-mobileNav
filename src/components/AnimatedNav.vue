@@ -9,7 +9,7 @@
           <component :is="item.icon" class="transition-all duration-500 w-[22px] h-[22px]" :class="[
             activeIndex === index
               ? 'text-[#7F3DFF] -translate-y-7 w-[26px] h-[26px]'
-              : 'text-gray-900 translate-y-0',
+              : 'text-[#C6C6C6] translate-y-0',
           ]" />
 
           <!-- Text -->
