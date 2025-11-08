@@ -13,7 +13,7 @@
           ]" />
 
           <!-- Text -->
-          <span class="absolute transition-all duration-500 text-gray-900 text-sm" :class="[
+          <span class="absolute transition-all duration-500 text-[#7F3DFF] text-sm" :class="[
             activeIndex === index
               ? 'opacity-100 translate-y-4'
               : 'opacity-0 translate-y-5',
@@ -28,6 +28,7 @@
         :style="{ transform: `translateX(${indicatorX}px)` }">
         <Curve />
       </li>
+      <!-- upper circle  -->
       <li class="absolute top-[-15px] left-[8px] transition-transform duration-300 z-0"
         :style="{ transform: `translateX(${indicatorX}px)` }">
         <Circle />
