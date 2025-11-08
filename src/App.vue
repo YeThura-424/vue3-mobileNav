@@ -27,11 +27,7 @@ const handleRouteChange = (routeName: string) => {
         <p class="text-center font-medium">Current Route: {{ currentRoute }}</p>
       </div>
       <div class="navbar-container w-[360px] fixed bottom-0">
-        <NavBar 
-          :routes="customRoutes" 
-          :initial-active-route="currentRoute" 
-          @route-change="handleRouteChange" 
-        />
+        <NavBar :routes="customRoutes" :initial-active-route="currentRoute" @route-change="handleRouteChange" />
       </div>
     </div>
 
