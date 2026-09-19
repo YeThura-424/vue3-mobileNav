@@ -1,2 +1,3 @@
-export { default as NavBar } from './NavBar.vue';
-export { default as AnimatedNav} from './AnimatedNav.vue'
+export { default as MobileNav } from './MobileNav.vue'
+export { navPresets } from './presets'
+export type { NavItem, NavVariant, NavTheme } from './types'

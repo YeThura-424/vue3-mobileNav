@@ -1,13 +1,15 @@
 {
   "name": "vue3-mobile-nav",
-  "private": true,
-  "version": "0.0.1",
+  "version": "0.1.0",
   "type": "module",
   "author": {
     "name": "Ye Thura"
   },
-  "repository": "https://github.com/YeThura-424/vue3-mobileNav",
-  "bugs": "https://github.com/YeThura-424/vue3-mobileNav/issue",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YeThura-424/vue3-mobileNav.git"
+  },
+  "bugs": "https://github.com/YeThura-424/vue3-mobileNav/issues",
   "keywords": [
     "vue",
     "bottom",
@@ -17,30 +19,63 @@
     "bottom-navigation"
   ],
   "files": [
-    "dist/*"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "build": "npm run typecheck && npm run build:docs && npm run build:lib",
+    "build:docs": "vite build",
+    "build:lib": "vite build --config vite.lib.config.ts",
+    "typecheck": "vue-tsc -b",
+    "test": "vitest run",
+    "test:package": "npm run build:lib && node tests/package-smoke.mjs && tsc -p tests/tsconfig.consumer.json",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "preview": "vite preview",
+    "prepack": "npm run typecheck && npm run build:lib",
+    "prepublishOnly": "npm test && npm run typecheck"
   },
-  "main": "dist/library.js",
-  "module": "dist/library.mjs",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "dependencies": {
-    "@headlessui/vue": "^1.7.23",
-    "@tabler/icons-vue": "^3.34.1",
-    "@tailwindcss/vite": "^4.1.11",
-    "tailwindcss": "^4.1.11",
-    "vue": "^3.5.18",
-    "vue-router": "^4.5.1"
+    "@iconify/vue": "^5.0.1"
   },
   "devDependencies": {
+    "@iconify-icons/solar": "^2.0.1",
+    "@types/node": "^22.20.3",
     "@vitejs/plugin-vue": "^6.0.1",
+    "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.7.0",
+    "jsdom": "^26.1.0",
+    "prettier": "^3.9.6",
     "typescript": "~5.8.3",
     "vite": "^7.1.0",
-    "vue-tsc": "^3.0.5"
+    "vite-plugin-dts": "^5.1.0",
+    "vitest": "^5.0.1",
+    "vue": "^3.5.18",
+    "vue-tsc": "^3.3.11"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "peerDependencies": {
+    "vue": "^3.5.0"
+  },
+  "description": "Animated mobile navigation for Vue 3 with Iconify icons, configurable routes, and eight design styles.",
+  "homepage": "https://github.com/YeThura-424/vue3-mobileNav#readme",
+  "publishConfig": {
+    "access": "public"
   }
 }
