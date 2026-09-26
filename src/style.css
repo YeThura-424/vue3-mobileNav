@@ -21,21 +21,48 @@
   --border: #e2e6ef;
 }
 
-
 :root[data-theme='dark'] {
   color-scheme: dark;
-  --text: #ede8f5; --page: #141a28; --surface: #202638; --surface-soft: #293249;
-  --primary: #adbbda; --accent: #7091e6; --secondary: #adbbda; --soft: #8697c4;
-  --lavender: #272c43; --muted: #adbbda; --border: #3c4866; --on-primary: #202638;
-  --scroll-thumb: #7091e6; --scroll-track: #202638;
+  --text: #ede8f5;
+  --page: #141a28;
+  --surface: #202638;
+  --surface-soft: #293249;
+  --primary: #adbbda;
+  --accent: #7091e6;
+  --secondary: #adbbda;
+  --soft: #8697c4;
+  --lavender: #272c43;
+  --muted: #adbbda;
+  --border: #3c4866;
+  --on-primary: #202638;
+  --scroll-thumb: #7091e6;
+  --scroll-track: #202638;
 }
-html, body, #app * { scrollbar-width: thin; scrollbar-color: var(--scroll-thumb) var(--scroll-track); }
-::-webkit-scrollbar { width: 9px; height: 9px; }
-::-webkit-scrollbar-track { background: var(--scroll-track); }
-::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border: 2px solid var(--scroll-track); border-radius: 999px; }
-::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+html,
+body,
+#app * {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-thumb) var(--scroll-track);
+}
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scroll-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scroll-thumb);
+  border: 2px solid var(--scroll-track);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
 /* Navigation stays swipeable without displaying either scrollbar. */
-#app .mn-scroller { scrollbar-width: none; }
+#app .mn-scroller {
+  scrollbar-width: none;
+}
 
 * {
   box-sizing: border-box;
@@ -1146,6 +1173,31 @@ td code {
 .install-steps p {
   font-size: 12px;
   margin-bottom: 13px;
+}
+
+.package-manager-picker {
+  display: inline-flex;
+  gap: 3px;
+  background: var(--surface-soft);
+  padding: 4px;
+  border-radius: 8px;
+  margin: 2px 0 4px;
+}
+
+.package-manager-picker button {
+  border: 0;
+  border-radius: 5px;
+  padding: 7px 12px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.package-manager-picker button.selected {
+  background: var(--surface);
+  color: var(--primary);
+  box-shadow: 0 1px 4px #2232530a;
+  font-weight: 600;
 }
 
 .code-block {

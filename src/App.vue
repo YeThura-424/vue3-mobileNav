@@ -9,7 +9,13 @@ import Playground from './docs/Playground.vue'
 import ReferenceDocs from './docs/ReferenceDocs.vue'
 
 const theme = ref<NavTheme>('light')
-watch(theme, value => { document.documentElement.dataset.theme = value }, { immediate: true })
+watch(
+  theme,
+  (value) => {
+    document.documentElement.dataset.theme = value
+  },
+  { immediate: true },
+)
 const mobileMenu = ref(false)
 const variant = ref<NavVariant>('cradle')
 const heroActive = ref('shop')
@@ -23,6 +29,7 @@ const navLinks = [
   { id: 'theming', label: 'Theming', icon: icons.palette },
   { id: 'accessibility', label: 'Accessibility', icon: icons.shield },
   { id: 'navigation', label: 'Navigation', icon: icons.layers },
+  { id: 'contributing', label: 'Contributing', icon: icons.code },
 ]
 const current = ref('overview')
 function navigate(id: string) {
@@ -42,7 +49,7 @@ function customize(id: NavVariant) {
   <a class="skip-link" href="#main-content">Skip to content</a>
   <header class="site-header">
     <a href="#overview" class="brand" @click="navigate('overview')"
-      ><span class="brand-mark"><Icon :icon="icons.layers" /></span
+      ><span class="brand-mark"> <Icon :icon="icons.layers" /> </span
       ><span>vue<span class="brand-light">mobile</span>nav<span class="brand-dot">.</span></span></a
     >
     <span class="header-divider" /><span class="header-label">Documentation</span
@@ -53,7 +60,7 @@ function customize(id: NavVariant) {
         href="https://github.com/YeThura-424/vue3-mobileNav"
         target="_blank"
         rel="noreferrer"
-        >View on GitHub <Icon :icon="icons.external" /></a
+        >View on GitHub <Icon :icon="icons.external" /> </a
       ><button
         class="icon-button"
         :aria-label="theme === 'light' ? 'Use dark theme' : 'Use light theme'"
@@ -87,18 +94,20 @@ function customize(id: NavVariant) {
         :class="{ active: current === link.id, 'section-break': index === 2 || index === 4 }"
         :aria-current="current === link.id ? 'location' : undefined"
         @click="navigate(link.id)"
-        ><Icon :icon="link.icon" />{{ link.label
-        }}<span v-if="link.id === 'variants'" class="nav-count">{{ navPresets.length }}</span
-        ><span v-if="link.id === 'playground'" class="new-tag">LIVE</span></a
       >
+        <Icon :icon="link.icon" />{{ link.label
+        }}<span v-if="link.id === 'variants'" class="nav-count">{{ navPresets.length }}</span
+        ><span v-if="link.id === 'playground'" class="new-tag">LIVE</span>
+      </a>
     </nav>
     <div class="sidebar-note">
-      <span class="note-icon"><Icon :icon="icons.code" /></span
+      <span class="note-icon"> <Icon :icon="icons.code" /> </span
       ><strong>Built for your next idea.</strong>
       <p>Open source. Vue native.<br />Yours to make your own.</p>
       <a href="https://github.com/YeThura-424/vue3-mobileNav" target="_blank" rel="noreferrer"
-        >Explore the source <Icon :icon="icons.arrow"
-      /></a>
+        >Explore the source
+        <Icon :icon="icons.arrow" />
+      </a>
     </div>
     <div class="sidebar-footer"><span class="status-dot" />Made with Vue 3 & TypeScript</div>
   </aside>
@@ -116,15 +125,15 @@ function customize(id: NavVariant) {
         </p>
         <div class="hero-actions">
           <a href="#installation" class="primary-button" @click="navigate('installation')"
-            >Get started <Icon :icon="icons.arrow" /></a
-          ><a href="#playground" class="secondary-button" @click="navigate('playground')"
-            ><Icon :icon="icons.settings" />Open playground</a
-          >
+            >Get started <Icon :icon="icons.arrow" /> </a
+          ><a href="#playground" class="secondary-button" @click="navigate('playground')">
+            <Icon :icon="icons.settings" />Open playground
+          </a>
         </div>
         <div class="hero-qualities">
-          <span><Icon :icon="icons.check" />Vue 3 + TypeScript</span
-          ><span><Icon :icon="icons.check" />Iconify icons</span
-          ><span><Icon :icon="icons.check" />MIT licensed</span>
+          <span> <Icon :icon="icons.check" />Vue 3 + TypeScript </span
+          ><span> <Icon :icon="icons.check" />Iconify icons </span
+          ><span> <Icon :icon="icons.check" />MIT licensed </span>
         </div>
       </div>
       <div class="hero-showcase">
@@ -180,8 +189,9 @@ function customize(id: NavVariant) {
         href="https://github.com/YeThura-424/vue3-mobileNav/issues"
         target="_blank"
         rel="noreferrer"
-        >Found an issue? <Icon :icon="icons.external"
-      /></a>
+        >Found an issue?
+        <Icon :icon="icons.external" />
+      </a>
     </footer>
   </main>
 </template>

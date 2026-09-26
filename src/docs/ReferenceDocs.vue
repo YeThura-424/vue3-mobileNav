@@ -1,7 +1,21 @@
 <script setup lang="ts">
+import { computed, ref } from 'vue'
 import { Icon } from '@iconify/vue'
 import { icons } from './icons'
 import CodeBlock from './CodeBlock.vue'
+
+const packageManagers = ['npm', 'pnpm', 'yarn', 'bun'] as const
+type PackageManager = (typeof packageManagers)[number]
+const packageManager = ref<PackageManager>('npm')
+const installCommand = computed(() => {
+  const commands = {
+    npm: 'npm install vue3-mobile-nav',
+    pnpm: 'pnpm add vue3-mobile-nav',
+    yarn: 'yarn add vue3-mobile-nav',
+    bun: 'bun add vue3-mobile-nav',
+  }
+  return commands[packageManager.value]
+})
 
 const quickStart =
   `<script setup lang="ts">
@@ -76,7 +90,12 @@ const props = [
   ['items', 'readonly NavItem[]', 'required', 'Labels, icons and destinations in display order.'],
   ['variant', 'NavVariant', 'pill', 'One of eight descriptive style names.'],
   ['modelValue', 'string', 'uncontrolled', 'Active ID. Use v-model for application-owned state.'],
-  ['defaultActive', 'string', 'variant-dependent', 'Initial active ID; circle styles default to the middle enabled item.'],
+  [
+    'defaultActive',
+    'string',
+    'variant-dependent',
+    'Initial active ID; circle styles default to the middle enabled item.',
+  ],
   ['activePath', 'string', 'none', 'Exact destination match; reactive route state.'],
   [
     'navigate',
@@ -84,7 +103,12 @@ const props = [
     'native links',
     'Handle relative destinations with your router.',
   ],
-  ['featuredId', 'string', 'active item', 'Sets uncontrolled selection; the circle always follows the active item. A model or route takes precedence.'],
+  [
+    'featuredId',
+    'string',
+    'active item',
+    'Sets uncontrolled selection; the circle always follows the active item. A model or route takes precedence.',
+  ],
   ['theme', "'light' | 'dark'", 'light', 'Surface and foreground defaults.'],
   ['position', "'inline' | 'fixed'", 'inline', 'Flow layout or fixed at the viewport bottom.'],
   ['label', 'string', 'Main navigation', 'Accessible navigation landmark name.'],
@@ -107,12 +131,19 @@ const tokens = [
       <div class="step-number">01</div>
       <div>
         <h3>Install the package</h3>
-        <CodeBlock title="Terminal · after the npm release" code="npm install vue3-mobile-nav" />
-        <p>
-          This repository is ready to publish. Until the first release, run
-          <code>npm pack</code> here and install the generated
-          <code>vue3-mobile-nav-0.1.0.tgz</code> in your app.
-        </p>
+        <div class="package-manager-picker" aria-label="Choose your package manager">
+          <button
+            v-for="manager in packageManagers"
+            :key="manager"
+            type="button"
+            :class="{ selected: packageManager === manager }"
+            :aria-pressed="packageManager === manager"
+            @click="packageManager = manager"
+          >
+            {{ manager }}
+          </button>
+        </div>
+        <CodeBlock :title="`Terminal · ${packageManager}`" :code="installCommand" />
       </div>
     </div>
     <div class="install-steps">
@@ -210,8 +241,9 @@ const tokens = [
         <h3>Selection</h3>
         <p>
           <code>update:modelValue(id)</code> supports two-way binding. Without a model or active
-          path, the component manages selection internally, starting at
-          <code>defaultActive</code>, then a valid <code>featuredId</code>, then the enabled item nearest the middle for circle styles (left on ties). Pill and Underline start at the first enabled item.
+          path, the component manages selection internally, starting at <code>defaultActive</code>,
+          then a valid <code>featuredId</code>, then the enabled item nearest the middle for circle
+          styles (left on ties). Pill and Underline start at the first enabled item.
         </p>
       </div>
       <div>
@@ -225,8 +257,9 @@ const tokens = [
     </div>
     <p>
       IDs must be stable, unique and nonempty. Duplicate/empty IDs are ignored. Uncontrolled
-      selection falls back to a valid featured ID, then the middle enabled item for circle styles or the first enabled item for other styles after removal or disabling. Invalid controlled
-      IDs or unmatched paths leave every item in its default state.
+      selection falls back to a valid featured ID, then the middle enabled item for circle styles or
+      the first enabled item for other styles after removal or disabling. Invalid controlled IDs or
+      unmatched paths leave every item in its default state.
     </p>
   </section>
 
@@ -281,6 +314,30 @@ const tokens = [
       Missing active icons use the default icon with active styling. Invalid or unavailable Iconify
       names may leave the icon blank; the accessible label remains. For reliable offline rendering,
       bundle your chosen icons as data.
+    </p>
+  </section>
+
+  <section id="contributing" class="docs-section reference-section">
+    <span class="eyebrow">BUILD IT TOGETHER</span>
+    <h2>Contributing</h2>
+    <p>
+      Contributions are welcome. Install dependencies with <code>npm ci</code>, create a focused
+      branch, and run the project checks that apply to your change before opening a pull request.
+    </p>
+    <CodeBlock
+      title="Terminal · project checks"
+      code="npm test&#10;npm run typecheck&#10;npm run build&#10;npm run test:package&#10;npm run format:check"
+    />
+    <p>
+      Add or update tests for behavior changes and update the documentation when public behavior or
+      options change. See the
+      <a
+        href="https://github.com/YeThura-424/vue3-mobileNav/blob/main/CONTRIBUTING.md"
+        target="_blank"
+        rel="noreferrer"
+        >full contribution guide</a
+      >
+      for setup and pull request details.
     </p>
   </section>
 </template>
