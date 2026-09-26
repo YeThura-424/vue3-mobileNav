@@ -200,6 +200,10 @@ Items expose `data-state="active"` or `data-state="default"`. Use CSS variables 
 - Empty/all-disabled lists are supported. Reduced motion disables animations.
 - Use modern browsers for CSS masks and smoothly interpolated cutouts.
 
+## Contributing
+
+Contributions are welcome. See the [contribution guide](CONTRIBUTING.md) for development setup and pull request instructions.
+
 ## License
 
 [MIT](LICENSE)
