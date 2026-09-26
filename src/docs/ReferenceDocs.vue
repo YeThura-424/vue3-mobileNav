@@ -144,11 +144,6 @@ const tokens = [
           </button>
         </div>
         <CodeBlock :title="`Terminal · ${packageManager}`" :code="installCommand" />
-        <p>
-          The package is published as <code>vue3-mobile-nav</code>. To use this checkout before the
-          first release, run <code>npm pack</code> here and install the generated
-          <code>vue3-mobile-nav-0.1.0.tgz</code> in your app.
-        </p>
       </div>
     </div>
     <div class="install-steps">
@@ -319,6 +314,30 @@ const tokens = [
       Missing active icons use the default icon with active styling. Invalid or unavailable Iconify
       names may leave the icon blank; the accessible label remains. For reliable offline rendering,
       bundle your chosen icons as data.
+    </p>
+  </section>
+
+  <section id="contributing" class="docs-section reference-section">
+    <span class="eyebrow">BUILD IT TOGETHER</span>
+    <h2>Contributing</h2>
+    <p>
+      Contributions are welcome. Install dependencies with <code>npm ci</code>, create a focused
+      branch, and run the project checks that apply to your change before opening a pull request.
+    </p>
+    <CodeBlock
+      title="Terminal · project checks"
+      code="npm test&#10;npm run typecheck&#10;npm run build&#10;npm run test:package&#10;npm run format:check"
+    />
+    <p>
+      Add or update tests for behavior changes and update the documentation when public behavior or
+      options change. See the
+      <a
+        href="https://github.com/YeThura-424/vue3-mobileNav/blob/main/CONTRIBUTING.md"
+        target="_blank"
+        rel="noreferrer"
+        >full contribution guide</a
+      >
+      for setup and pull request details.
     </p>
   </section>
 </template>
