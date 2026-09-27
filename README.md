@@ -2,6 +2,8 @@
 
 Eight animated mobile navigation styles for Vue 3. Configure labels, Iconify icons, active states, destinations, item order, and item count through one component.
 
+**Documentation:** [vue3-mobile-nav.netlify.app](https://vue3-mobile-nav.netlify.app/)
+
 ## Install
 
 Install the published `vue3-mobile-nav` package with your preferred package manager:
