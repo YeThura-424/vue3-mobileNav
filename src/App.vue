@@ -53,7 +53,7 @@ function customize(id: NavVariant) {
       ><span>vue<span class="brand-light">mobile</span>nav<span class="brand-dot">.</span></span></a
     >
     <span class="header-divider" /><span class="header-label">Documentation</span
-    ><span class="version-tag">v0.1.0</span>
+    ><span class="version-tag">v0.2.0</span>
     <div class="header-actions">
       <a
         class="github-link"
