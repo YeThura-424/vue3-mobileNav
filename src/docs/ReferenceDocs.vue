@@ -16,6 +16,15 @@ const installCommand = computed(() => {
   }
   return commands[packageManager.value]
 })
+const updateCommand = computed(() => {
+  const commands = {
+    npm: 'npm install vue3-mobile-nav@latest',
+    pnpm: 'pnpm add vue3-mobile-nav@latest',
+    yarn: 'yarn add vue3-mobile-nav@latest',
+    bun: 'bun add vue3-mobile-nav@latest',
+  }
+  return commands[packageManager.value]
+})
 
 const quickStart =
   `<script setup lang="ts">
@@ -155,6 +164,26 @@ const tokens = [
           <code>to</code> tells each item where to go. Omit it for an action button.
         </p>
         <CodeBlock :code="quickStart" title="App.vue · native links" />
+      </div>
+    </div>
+    <div class="install-steps">
+      <div class="step-number">03</div>
+      <div>
+        <h3>Update the package</h3>
+        <p>To install the latest release, choose your package manager and run:</p>
+        <div class="package-manager-picker" aria-label="Choose your package manager">
+          <button
+            v-for="manager in packageManagers"
+            :key="manager"
+            type="button"
+            :class="{ selected: packageManager === manager }"
+            :aria-pressed="packageManager === manager"
+            @click="packageManager = manager"
+          >
+            {{ manager }}
+          </button>
+        </div>
+        <CodeBlock :title="`Terminal · ${packageManager}`" :code="updateCommand" />
       </div>
     </div>
     <aside class="callout">
