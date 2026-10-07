@@ -22,3 +22,7 @@ npm run format:check
 ```
 
 Keep changes focused, add or update tests for behavior changes, and update the documentation when public behavior or options change. Include a concise summary and the checks you ran in your pull request.
+
+## Feature ideas and bug reports
+
+Use the GitHub issue forms to describe the user problem and, for bugs, include a minimal reproduction, package version, Vue version, and browser. For feature ideas, explain the use case so proposals can be compared and prioritized. Release notes belong in `CHANGELOG.md`.

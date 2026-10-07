@@ -12,8 +12,14 @@
   "bugs": "https://github.com/YeThura-424/vue3-mobileNav/issues",
   "keywords": [
     "vue",
+    "vue3",
+    "vue-component",
+    "vue-router",
+    "mobile-navigation",
+    "tab-bar",
     "bottom",
     "navigation",
+    "bottom-nav",
     "custom",
     "curved",
     "bottom-navigation"

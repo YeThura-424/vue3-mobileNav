@@ -2,7 +2,23 @@
 
 Eight animated mobile navigation styles for Vue 3. Configure labels, Iconify icons, active states, destinations, item order, and item count through one component.
 
+> Build a polished mobile tab bar without wiring selection, links, keyboard behavior, reduced motion, or safe-area spacing yourself.
+
 **Documentation:** [vue3-mobile-nav.netlify.app](https://vue3-mobile-nav.netlify.app/)
+**Try it:** [Open the live playground](https://vue3-mobile-nav.netlify.app/#playground)
+**Release notes:** [CHANGELOG.md](CHANGELOG.md)
+
+![Vue Mobile Nav showing all eight navigation styles](public/social-preview.png)
+
+## Choose a style
+
+| Use case | Try | Why |
+| --- | --- | --- |
+| Familiar app tabs | `pill` or `underline` | Clear selection with a compact footprint |
+| A prominent central action | `cradle`, `orbit`, or `peak` | Raises a featured item above the bar |
+| A subtle custom look | `float`, `outline`, or `soft-rise` | Adds motion without a large filled tab |
+
+All styles use the same props, events, and `NavItem` shape. Preview them and copy working setup code in the playground.
 
 ## Install
 
@@ -15,7 +31,7 @@ Install the published `vue3-mobile-nav` package with your preferred package mana
 | Yarn            | `yarn add vue3-mobile-nav`    |
 | Bun             | `bun add vue3-mobile-nav`     |
 
-Requires Vue 3.5+. No CSS framework or router dependency.
+Requires Vue 3.5+. No CSS framework or router dependency. `@iconify/vue` is a runtime dependency for rendering Iconify icons; the package does not bundle an icon collection. Use imported icon data for offline or server-rendered apps.
 
 ## Quick start
 
@@ -73,6 +89,8 @@ const items = [
   <MobileNav :items="items" :active-path="route.path" :navigate="router.push" variant="underline" />
 </template>
 ```
+
+For nested routes, use `v-model` or a computed active ID instead of exact `activePath` matching. In Nuxt or another SSR app, pass imported Iconify icon data for server rendering and include the stylesheet in your app entry; keep browser-only APIs in client-side code.
 
 - `activePath` exactly matches an item's `to`. Unmatched paths leave all items in their default state.
 - Use `v-model` or `:model-value` for custom matching, nested routes, or named routes. A supplied model value takes precedence over `activePath`.
@@ -201,6 +219,22 @@ Items expose `data-state="active"` or `data-state="default"`. Use CSS variables 
 - Fixed mode includes safe-area padding. Reserve roughly 128px plus the device safe area below page content and avoid transformed ancestors around fixed navigation.
 - Empty/all-disabled lists are supported. Reduced motion disables animations.
 - Use modern browsers for CSS masks and smoothly interpolated cutouts.
+
+For fixed navigation, set `position="fixed"`; reserve about 128px plus the device safe area below the page content. The component is attached to the viewport, so test it at narrow phone widths and avoid transformed ancestors.
+
+## Compatibility and dependencies
+
+- Vue 3.5 or newer is required.
+- Vue Router is optional; native destinations work without it.
+- Iconify string names are fetched on demand by Iconify. Network-restricted apps can provide imported icon data instead.
+- Cutout shapes use CSS masks. Browsers without registered CSS properties still show the navigation, but the cutout may jump instead of interpolating smoothly.
+
+## Common setup issues
+
+- **Icons are blank:** verify the Iconify name and network access, or import icon data from an icon package.
+- **No item is active:** `activePath` uses exact matching. For nested paths or named routes, control selection with `v-model`.
+- **Fixed bar overlaps content:** reserve bottom space in the page layout and account for the safe area.
+- **The bar is clipped or misplaced:** remove transformed ancestors around fixed navigation.
 
 ## Contributing
 

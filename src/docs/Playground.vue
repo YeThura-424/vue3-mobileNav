@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { Icon } from '@iconify/vue'
 import { MobileNav, navPresets } from '../components'
 import type { NavItem, NavVariant, NavTheme } from '../components'
@@ -18,13 +18,61 @@ const featured = ref('shop')
 const theme = defineModel<NavTheme>('theme', { default: 'light' })
 const previewPath = ref('/shop')
 const integration = ref<'router' | 'native'>('router')
+const phonePreview = ref(false)
+const notice = ref('')
+const copyInstall = async (manager: 'npm' | 'pnpm' | 'yarn' | 'bun') => {
+  const command = {
+    npm: 'npm install vue3-mobile-nav',
+    pnpm: 'pnpm add vue3-mobile-nav',
+    yarn: 'yarn add vue3-mobile-nav',
+    bun: 'bun add vue3-mobile-nav',
+  }[manager]
+  await copyText(command, 'Install command copied')
+}
+async function copyText(value: string, message: string) {
+  try {
+    await navigator.clipboard.writeText(value)
+    notice.value = message
+  } catch {
+    notice.value = 'Clipboard access is unavailable in this browser'
+  }
+  window.setTimeout(() => (notice.value = ''), 2500)
+}
+const shareUrl = computed(() => {
+  const state = { items: items.value, active: active.value, theme: theme.value, variant: props.variant }
+  const url = new URL(window.location.href)
+  const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(state))))
+  url.hash = `playground=${encodeURIComponent(encoded)}`
+  return url.toString()
+})
+onMounted(() => {
+  const match = window.location.hash.match(/^#playground=(.+)$/)
+  if (!match) return
+  try {
+    const state = JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(match[1])))))
+    if (!Array.isArray(state.items) || !state.items.every((item: unknown) =>
+      item && typeof item === 'object' && typeof (item as NavItem).id === 'string' && typeof (item as NavItem).label === 'string' && typeof (item as NavItem).icon === 'string',
+    )) return
+    items.value = state.items
+    if (typeof state.active === 'string') {
+      active.value = state.active
+      featured.value = state.active
+      previewPath.value = state.items.find((item: NavItem) => item.id === state.active)?.to || '(action)'
+    }
+    if (state.theme === 'light' || state.theme === 'dark') theme.value = state.theme
+    if (navPresets.some((preset) => preset.id === state.variant)) emit('update:variant', state.variant)
+  } catch {
+    // Ignore malformed shared playground states.
+  }
+})
 watch(active, id => {
   featured.value = id
   previewPath.value = items.value.find(item => item.id === id)?.to || '(action)'
 })
 let nextId = 1
 function add() {
-  const id = `item-${nextId++}`
+  let id = `item-${nextId++}`
+  while (items.value.some((item) => item.id === id)) id = `item-${nextId++}`
   items.value.push({ id, label: 'New item', icon: 'solar:settings-linear', to: `/${id}` })
 }
 function remove(index: number) {
@@ -80,6 +128,15 @@ const snippet = computed(() => {
           <h3>Configuration</h3>
           <button class="text-button" @click="reset"><Icon :icon="icons.reset" />Reset</button>
         </div>
+        <div class="playground-sharing">
+          <button class="text-button" @click="copyText(shareUrl, 'Playground link copied')"><Icon :icon="icons.copy" />Copy share link</button>
+          <span>Install:</span>
+          <button class="text-button" @click="copyInstall('npm')">npm</button>
+          <button class="text-button" @click="copyInstall('pnpm')">pnpm</button>
+          <button class="text-button" @click="copyInstall('yarn')">Yarn</button>
+          <button class="text-button" @click="copyInstall('bun')">Bun</button>
+        </div>
+        <p v-if="notice" role="status" class="field-help">{{ notice }}</p>
         <div class="field-row">
           <label
             >Variant<select
@@ -134,6 +191,9 @@ const snippet = computed(() => {
                 v-model="item.to"
                 placeholder="/profile · leave empty for an action"
               />
+              <label :for="`badge-${item.id}`">Badge (optional)</label>
+              <input :id="`badge-${item.id}`" v-model="item.badge" placeholder="e.g. 3 or New" />
+              <label class="item-toggle"><input v-model="item.disabled" type="checkbox" /> Disabled</label>
             </div>
             <div class="item-actions">
               <button
@@ -170,11 +230,11 @@ const snippet = computed(() => {
           >. Custom names load from the Iconify API.
         </p>
       </div>
-      <div class="preview-column">
+      <div class="preview-column" :class="{ 'phone-frame': phonePreview }">
         <div class="live-preview panel" :class="{ dark: theme === 'dark' }">
           <div class="panel-title">
             <span class="live-label"><span />LIVE PREVIEW</span
-            ><button
+            ><label class="phone-preview-toggle"><input v-model="phonePreview" type="checkbox" /> Phone width</label><button
               class="icon-button"
               :aria-label="theme === 'light' ? 'Use dark theme' : 'Use light theme'"
               @click="theme = theme === 'light' ? 'dark' : 'light'"
