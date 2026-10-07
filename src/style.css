@@ -900,6 +900,32 @@ td code {
   color: var(--muted);
 }
 
+.playground-sharing {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 14px 0;
+  padding: 9px 10px;
+  background: var(--surface-soft);
+  border-radius: 6px;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.item-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.item-toggle input {
+  width: auto;
+  margin: 0;
+}
+
 .items-heading {
   display: flex;
   align-items: center;
@@ -1076,6 +1102,24 @@ td code {
 .preview-content > span {
   font-size: 10px;
   color: var(--muted);
+}
+
+.preview-column.phone-frame {
+  width: min(100%, 390px);
+  margin-inline: auto;
+}
+
+.phone-preview-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.phone-preview-toggle input {
+  margin: 0;
 }
 
 .live-preview.dark {
