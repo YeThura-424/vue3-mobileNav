@@ -1,0 +1,33 @@
+name: Bug report
+description: Report a reproducible problem with vue3-mobile-nav.
+labels: ["bug"]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Package version
+      placeholder: e.g. 0.2.0
+    validations:
+      required: true
+  - type: input
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Share a repository or online reproduction if possible.
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: What happened?
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Vue version and browser
+      placeholder: Vue 3.5, Chrome 130
